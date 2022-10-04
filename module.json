@@ -1,0 +1,20 @@
+{
+  "name": "tor2e-council-tracker",
+  "title": "TOR2e Council Tracker",
+  "description": "This module simply contains two macros for easily creating and tracking Councils in The One Ring 2nd Edition.",
+  "version": "1.0.0",
+  "author": "cineasteroid",
+  "minimumCoreVersion": "9",
+  "compatibleCoreVersion": "9.280",
+  "packs": [
+    {
+      "name": "tor2e-council-tracker-macros",
+      "label": "TOR2e Council Tracker Macros",
+      "path": "./packs/macros.db",
+      "entity": "Macro",
+      "type": "Macro"
+    }
+  ],
+  "manifest": "https://gitlab.com/encounterlibrary/my-content-module/-/raw/main/module.json",
+  "download": "https://gitlab.com/encounterlibrary/my-content-module/-/raw/main/my-content-module.zip"
+}
