@@ -141,7 +141,7 @@ function addSuccess() {
     },
     content: `
                 <h2 style="text-align: center; color: #33803c;">Success!</h2>
-                <p><strong>Successes: </strong>${successTally}</p>
+                <p><strong>Successes: </strong>${successTally}/${resistVal}</p>
                 <p><strong>Failures: </strong>${failTally}</p>
                 <hr>
                 <p><strong>Attempt: </strong>${
@@ -167,7 +167,7 @@ function addFailure() {
     },
     content: `
                 <h2 style="text-align: center; color: #780c0c;">Fail!</h2>
-                <p><strong>Successes: </strong>${successTally}</p>
+                <p><strong>Successes: </strong>${successTally}/${resistVal}</p>
                 <p><strong>Failures: </strong>${failTally}</p>
                 <hr>
                 <p><strong>Attempt: </strong>${
