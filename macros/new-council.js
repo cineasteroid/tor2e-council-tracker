@@ -42,6 +42,7 @@ const style = `
       font-size: 1.15rem;
       font-weight: bold;
       margin-top: 16px;
+      text-align: left;
     }
     .dialog input {
       margin: 4px auto 12px auto;
@@ -52,11 +53,33 @@ const style = `
     .dialog .dialog-button:hover {
       cursor: pointer;
     }
+    .audience {
+      margin: auto;
+      text-align: center;
+    }
+    .audience label[for="audience-name"] {
+      float: left;
+    }
+    .dialog input[name="audience-name"] {
+      height: 32px;
+      text-align: left;
+      margin: 2px auto 6px auto;
+    }
     .dialog input[name="resistance"] {
       display: inline;
     }
     .dialog input[name="resistance"]:hover {
       cursor: pointer;
+    }
+    .introduction {
+      margin: auto;
+      text-align: center;
+    }
+    .dialog input[name='intro-value'] {
+      text-align: center;
+      width: 100px;
+      height: 28px;
+      margin-left: 6px;
     }
     .resist-options {
       margin: auto;
