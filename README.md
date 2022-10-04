@@ -21,7 +21,8 @@ Make sure you have the "TOR2e Council Tracker" enabled in the "Manage Modules" m
 
 This module will download a new compendium titled "TOR2e Council Tracker Macros". Inside will be the two macros you need: **New Council** and **Council Tracker**.  
 
-You can either drag the macros directly into you macro folders/hotbar or right-click the compendium and select "Import All Content".  
+You can either drag the macros directly into you macro folders/hotbar or right-click the compendium and select "Import All Content". You need **BOTH** macros in order to get the full functionality. 
+
 Now the macros are ready to use!
 
 ## How to Use
