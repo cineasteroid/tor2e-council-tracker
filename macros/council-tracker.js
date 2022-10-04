@@ -101,7 +101,6 @@ function getCouncil() {
   const lastCouncil = [...msgs]
     .reverse()
     .find((msg) => msg.data.flags.hasOwnProperty('successes' && 'time-limit'));
-  console.log(lastCouncil);
 
   if (lastCouncil) {
     ui.notifications.info('Your Council data has successfully been retrieved.');
@@ -151,8 +150,7 @@ function addSuccess() {
     `,
   };
 
-  let msg = ChatMessage.create(chatData, {});
-  console.log(msg);
+  ChatMessage.create(chatData, {});
   checkTally();
 }
 
@@ -175,8 +173,7 @@ function addFailure() {
     `,
   };
 
-  let msg = ChatMessage.create(chatData, {});
-  console.log(msg);
+  ChatMessage.create(chatData, {});
   checkTally();
 }
 
@@ -194,8 +191,7 @@ function checkTally() {
         `,
     };
 
-    let msg = ChatMessage.create(chatData, {});
-    console.log(msg);
+    ChatMessage.create(chatData, {});
 
     const dataBtn = elem.DATA_BTN;
     const succBtn = elem.SUCC_BTN;
@@ -225,8 +221,7 @@ function checkTally() {
         `,
     };
 
-    let msg = ChatMessage.create(chatData, {});
-    console.log(msg);
+    ChatMessage.create(chatData, {});
 
     const dataBtn = elem.DATA_BTN;
     const succBtn = elem.SUCC_BTN;

@@ -134,8 +134,7 @@ new Dialog({
             </div>
           `,
         };
-        let msg = ChatMessage.create(chatData, {});
-        console.log(msg);
+        ChatMessage.create(chatData, {});
 
         game.macros.getName('Council Tracker').execute();
       },
