@@ -20,8 +20,11 @@ const style = `
 		    background: url(ui/parchment.jpg);
 		}
 		.window-app {
-            height: 350px;
+            height: 365px;
             width: auto;
+        }
+        .dialog form {
+            margin: 10px 4px;
         }
         #success {
             visibility: hidden;
