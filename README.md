@@ -6,6 +6,8 @@ This module provides two macros that can be used in The One Ring 2nd Edition sys
 
 ## How to Install
 
+If you wish, you can simply copy the two macro scripts in the macros folder above and create a "New Council" macro and "Council Tracker" macro respectively. Alternatively, you can download the macros via a module using the instructions below.
+
 ### #1: Package Installation
 For now, this module is not yet officially available directly through Foundry's package installer interface. If you wish to install this module, go to your Foundry's setup page, go to the "Add-On Modules" tab, click "Install Module" at the bottom of the window. Where it says "Manifest URL", paste the following link: https://github.com/cineasteroid/tor2e-council-tracker/releases/latest/download/module.json
 
