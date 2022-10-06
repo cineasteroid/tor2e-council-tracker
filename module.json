@@ -2,7 +2,7 @@
   "name": "tor2e-council-tracker",
   "title": "TOR2e Council Tracker",
   "description": "This module simply contains two macros for easily creating and tracking Councils in The One Ring 2nd Edition.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "cineasteroid",
   "authors": [
     {
