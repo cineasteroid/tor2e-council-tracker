@@ -226,7 +226,7 @@ function addAdtlSucc() {
 //Check when Current Successes = Successes Needed, if so automatically sends Council Success message to chat
 function checkTally() {
   const elem = getElements();
-  if (successTally == resistVal) {
+  if (successTally + +adtlSuccTally == resistVal) {
     let chatData = {
       speaker: ChatMessage.getSpeaker({
         alias: `Council with ${council.audience}`,
@@ -255,8 +255,9 @@ function checkTally() {
 
     //If # of total attempts is reached without required number of successes, send Council Failure message to chat
   } else if (
-    (timeLimit - (successTally + failTally) < resistVal - successTally &&
-      successTally < resistVal) ||
+    (timeLimit - (successTally + failTally) <
+      resistVal - (successTally + +adtlSuccTally) &&
+      successTally + +adtlSuccTally < resistVal) ||
     (successTally + failTally === timeLimit && successTally < resistVal)
   ) {
     let chatData = {
