@@ -6,8 +6,11 @@ const content = `
     <div class='tracker'>
       <button id="retrieve" name="retrieve">Retrieve Council Data from Chat</button>
       <p class='info' id="p1"></p>
-      <button id="success" class="results" name="success">Add Success</button>
-      <button id="fail" class="results" name="fail">Add Fail</button>
+      <div class="results-group">
+        <button id="success" class="results" name="success">Add Success</button>
+        <button id="fail" class="results" name="fail">Add Fail</button>
+        <button id="additional" class="results" name="additional">Add Additional Success</button>
+      </div>
       <p class='final' id="closeText"></p>
     </div>
   </form>
@@ -20,18 +23,21 @@ const style = `
       background: url(ui/parchment.jpg);
     }
     .window-app {
-      height: 365px;
+      height: 430px;
       width: auto;
     }
     .dialog form {
       margin: 10px 4px;
-  }
+    }
     #success {
       visibility: hidden;
     }
     #fail {
       visibility: hidden;
-  }
+    }
+    #additional {
+      visibility: hidden;
+    }
     button {
       cursor: pointer;
     }
@@ -45,8 +51,15 @@ const style = `
       background: rgba(0, 0, 0, 0.2);
     }
     .results {
-      width: 150px;
-      display: inline;
+      width: 300px;
+      margin: 0 auto;
+    }
+    .results-group {
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-itmes: center;
+      flex-direction: column;
     }
     #outcome {
       visibility: hidden;
@@ -85,14 +98,16 @@ let council;
 
 let successTally = 0;
 let failTally = 0;
+let adtlSuccTally = 0;
 
 function getElements() {
   const DATA_BTN = document.getElementById('retrieve');
   const SUCC_BTN = document.getElementById('success');
   const FAIL_BTN = document.getElementById('fail');
+  const ADTL_SUCC_BTN = document.getElementById('additional');
   const P1_TEXT = document.getElementById('p1');
   const CLOSE_TEXT = document.getElementById('closeText');
-  return { DATA_BTN, SUCC_BTN, FAIL_BTN, P1_TEXT, CLOSE_TEXT };
+  return { DATA_BTN, SUCC_BTN, FAIL_BTN, ADTL_SUCC_BTN, P1_TEXT, CLOSE_TEXT };
 }
 
 //Retrieve the most recent Council message and return the values for Resistance (Successes needed) and Time Limit
@@ -124,10 +139,12 @@ function addParameters() {
   const elem = getElements();
   const succBtn = elem.SUCC_BTN;
   const failBtn = elem.FAIL_BTN;
+  const adtlSuccBtn = elem.ADTL_SUCC_BTN;
   const p1 = elem.P1_TEXT;
   p1.innerText = `Time Limit: ${council['time-limit']} | Successes Needed: ${council['target']}`;
   succBtn.style.visibility = SET_VISIBILITY_VISIBLE;
   failBtn.style.visibility = SET_VISIBILITY_VISIBLE;
+  adtlSuccBtn.style.visibility = SET_VISIBILITY_VISIBLE;
 }
 
 //When Add Success/Add Failure buttons are pressed, output a message to chat that tallies each
@@ -143,7 +160,9 @@ function addSuccess() {
     },
     content: `
       <h2 style="text-align: center; color: #33803c;">Success!</h2>
-      <p><strong>Successes: </strong>${successTally}/${resistVal}</p>
+      <p><strong>Successes: </strong>${
+        successTally + adtlSuccTally
+      }/${resistVal}</p>
       <p><strong>Failures: </strong>${failTally}</p>
       <hr>
       <p><strong>Attempt: </strong>${successTally + +failTally}/${timeLimit}</p>
@@ -166,7 +185,34 @@ function addFailure() {
     },
     content: `
       <h2 style="text-align: center; color: #780c0c;">Fail!</h2>
-      <p><strong>Successes: </strong>${successTally}/${resistVal}</p>
+      <p><strong>Successes: </strong>${
+        successTally + adtlSuccTally
+      }/${resistVal}</p>
+      <p><strong>Failures: </strong>${failTally}</p>
+      <hr>
+      <p><strong>Attempt: </strong>${successTally + +failTally}/${timeLimit}</p>
+    `,
+  };
+
+  ChatMessage.create(chatData, {});
+  checkTally();
+}
+
+function addAdtlSucc() {
+  adtlSuccTally++;
+  let chatData = {
+    speaker: ChatMessage.getSpeaker({
+      alias: `Council with ${council.audience}`,
+    }),
+    flags: {
+      'success-tally': successTally,
+      'fail-tally': failTally,
+    },
+    content: `
+      <h2 style="text-align: center; color: #33803c;">Success!</h2>
+      <p><strong>Successes: </strong>${
+        successTally + adtlSuccTally
+      }/${resistVal}</p>
       <p><strong>Failures: </strong>${failTally}</p>
       <hr>
       <p><strong>Attempt: </strong>${successTally + +failTally}/${timeLimit}</p>
@@ -196,13 +242,15 @@ function checkTally() {
     const dataBtn = elem.DATA_BTN;
     const succBtn = elem.SUCC_BTN;
     const failBtn = elem.FAIL_BTN;
+    const adtlSuccBtn = elem.ADTL_SUCC_BTN;
     const closeText = elem.CLOSE_TEXT;
 
     succBtn.style.visibility = SET_VISIBILITY_HIDDEN;
     failBtn.style.visibility = SET_VISIBILITY_HIDDEN;
+    adtlSuccBtn.style.visibility = SET_VISIBILITY_HIDDEN;
 
     closeText.innerText = `This Council is now complete. Please Close this window.`;
-    closeText.style.visibility = 'visible';
+    closeText.style.visibility = SET_VISIBILITY_VISIBLE;
     dataBtn.style.visibility = SET_VISIBILITY_HIDDEN;
 
     //If # of total attempts is reached without required number of successes, send Council Failure message to chat
@@ -226,10 +274,12 @@ function checkTally() {
     const dataBtn = elem.DATA_BTN;
     const succBtn = elem.SUCC_BTN;
     const failBtn = elem.FAIL_BTN;
+    const adtlSuccBtn = elem.ADTL_SUCC_BTN;
     const closeText = elem.CLOSE_TEXT;
 
     succBtn.style.visibility = SET_VISIBILITY_HIDDEN;
     failBtn.style.visibility = SET_VISIBILITY_HIDDEN;
+    adtlSuccBtn.style.visibility = SET_VISIBILITY_HIDDEN;
 
     closeText.innerText = `This Council is now complete. Please Close this window.`;
     closeText.style.visibility = SET_VISIBILITY_VISIBLE;
@@ -250,6 +300,7 @@ new Dialog({
     const dataBtn = document.getElementById('retrieve');
     const succBtn = document.getElementById('success');
     const failBtn = document.getElementById('fail');
+    const adtlSuccBtn = document.getElementById('additional');
 
     dataBtn.addEventListener('click', () => {
       council = getCouncil();
@@ -259,5 +310,6 @@ new Dialog({
     });
     succBtn.addEventListener('click', addSuccess);
     failBtn.addEventListener('click', addFailure);
+    adtlSuccBtn.addEventListener('click', addAdtlSucc);
   },
 }).render(true);
